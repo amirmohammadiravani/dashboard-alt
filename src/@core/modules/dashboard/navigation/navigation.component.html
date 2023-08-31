@@ -1,0 +1,66 @@
+<mat-sidenav-container class="sidenav-container">
+    <!-- Side Navigation -->
+    <mat-sidenav #drawer class="sideNavigation" fixedInViewport="true"
+                 [mode]="(isHandset$ | async) ? 'over' : 'side'"
+                 [opened]="(isHandset$ | async) ? false : true"
+                 position="start" *ngIf="navLinks && navLinks.length > 0">
+      <mat-toolbar class="logo">
+        <mat-toolbar-row>
+        </mat-toolbar-row>
+      </mat-toolbar>
+      <mat-nav-list class="navigation-list">
+        <a *ngFor="let nav of navLinks" mat-list-item [routerLink]="nav.path">
+          <mat-icon class="nav-icon">{{nav.icon}}</mat-icon>
+          <span class="nav-label">{{nav.label}}</span>
+        </a>
+      </mat-nav-list>    
+    </mat-sidenav>
+  
+    <!-- Notifications -->
+    <mat-sidenav #notification class="notification" fixedInViewport="true" mode="over" closed position="end">
+      <mat-toolbar class="notification-toolbar">
+        <mat-label>Notifications</mat-label>
+        <span class="toolbar-spacer"></span>
+        <button mat-button (click)="notification.toggle()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-toolbar>
+      <mat-nav-list class="mat-nav-list">
+        <mat-list-item *ngFor="let notification of notifications">
+          <mat-icon>{{ notification.icon }}</mat-icon>
+          <span>{{ notification.message }}</span>
+        </mat-list-item>
+      </mat-nav-list>
+    </mat-sidenav>
+  
+    <!-- Main Content Area -->
+    <mat-sidenav-content>
+      <mat-toolbar fxLayout="row" fxLayoutAlign="start center">
+        <!-- Toggle button for side navigation -->
+        <button *ngIf="isHandset$ | async" mat-icon-button (click)="toggleDrawer()">
+          <mat-icon>{{ drawer?.opened ? 'menu_open' : 'menu' }}</mat-icon>
+        </button>
+  
+        <button mat-button (click)="notification.toggle()">
+          <mat-icon>notification_important</mat-icon>
+        </button>
+  
+        <span class="toolbar-spacer"></span>
+        <span class="toolbar-spacer"></span>
+  
+        <button mat-button [mat-menu-trigger-for]="menu">
+          <mat-icon>account_circle</mat-icon>
+          <mat-label>User</mat-label>
+        </button>
+  
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item routerLink="/">Profile</button>
+          <button mat-menu-item routerLink="/">Sign Out</button>
+        </mat-menu>
+      </mat-toolbar>
+      <div class="content-area">
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+  

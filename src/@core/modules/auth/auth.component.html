@@ -1,0 +1,58 @@
+<mat-grid-list cols="2" rowHeight="100%">
+    <mat-grid-tile class="signup">
+      <div class="logo-container">
+    </div>
+        <div>
+            <h1 class="title">Sign up</h1>
+        </div>
+        <div class="loginsignup">
+            <div class="example-container">
+                <mat-form-field class="input">
+                  <input matInput placeholder="Enter your Name" required #nameInput>
+                </mat-form-field>
+                <mat-form-field>
+                  <input matInput placeholder="Enter your Surname" required #surnameInput>
+                  <mat-error *ngIf="surnameInput.oninvalid">Surname is required</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="example-container">
+                <mat-form-field>
+                  <input matInput placeholder="Enter your Birthday" required #birthdateInput>
+                </mat-form-field>
+              </div>
+              <div class="example-container">
+                <mat-form-field>
+                  <input matInput placeholder="Enter your email" required #emailInput>
+                  <mat-error *ngIf="emailInput.oninvalid">Email is not Valid</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="example-container">
+                <mat-form-field>
+                  <input matInput placeholder="Enter your Password" required #passwordInput>
+                  <mat-error *ngIf="passwordInput.oninvalid">Password is Not valid</mat-error>
+                </mat-form-field>
+              </div>
+              <button class="button" mat-button color="white" (click)="signup(nameInput.value, surnameInput.value, birthdateInput.value, emailInput.value, passwordInput.value)" >Sign up!</button>
+        </div>
+    </mat-grid-tile>
+    <mat-grid-tile class="login">
+      <div class="logo-container">
+    </div>
+        <h1 color="white">Login</h1>
+        <div class="loginsignup">
+            <div class="example-container">
+              <mat-form-field>
+                <input matInput placeholder="Enter your email" required id="loginEmail">
+                <mat-error *ngIf="email.hasError('required')">Email is required</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="example-container">
+              <mat-form-field>
+                <input matInput type="password" placeholder="Enter your Password" required id="loginPassword">
+                <mat-error *ngIf="password.hasError('required')">Password is required</mat-error>
+              </mat-form-field>
+            </div>
+            <button mat-button color="white" class="button" (click)="login()">Login!</button>
+        </div>
+    </mat-grid-tile>
+</mat-grid-list>
