@@ -9,10 +9,16 @@
         </mat-toolbar-row>
       </mat-toolbar>
       <mat-nav-list class="navigation-list">
-        <a *ngFor="let nav of navLinks" mat-list-item [routerLink]="nav.path">
-          <mat-icon class="nav-icon">{{nav.icon}}</mat-icon>
-          <span class="nav-label">{{nav.label}}</span>
-        </a>
+        <a
+  *ngFor="let nav of navLinks"
+  mat-list-item
+  [routerLink]="nav.path"
+  [ngClass]="{ 'active-link': isLinkActive(nav.path) }"
+>
+  <mat-icon class="nav-icon">{{ nav.icon }}</mat-icon>
+  <span class="nav-label">{{ nav.label }}</span>
+</a>
+
       </mat-nav-list>    
     </mat-sidenav>
   

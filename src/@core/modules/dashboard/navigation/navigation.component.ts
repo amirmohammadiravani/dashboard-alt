@@ -4,7 +4,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { ApiService } from 'src/@core/services/api.service';
-
+import { Router } from '@angular/router';
 import { HostBinding } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MatSidenav } from '@angular/material/sidenav';
@@ -33,7 +33,8 @@ export class NavigationComponent implements OnInit {
   constructor(
     private breakpointObserver: BreakpointObserver,
     private http: HttpClient,
-    private apiService: ApiService
+    private apiService: ApiService,
+    private router: Router 
   ) {}
 
   ngOnInit() {
@@ -52,6 +53,12 @@ export class NavigationComponent implements OnInit {
       }
     );
   }
+
+
+  isLinkActive(path: string): boolean {
+    return this.router.isActive(path, true);
+  }
+  
 
   toggleDrawer() {
     if (this.isHandset$) {
